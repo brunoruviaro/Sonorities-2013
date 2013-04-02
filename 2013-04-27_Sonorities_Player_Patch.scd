@@ -2,6 +2,8 @@
 // Sonorities 2013 PLAYER PATCH
 // ==============================
 
+// OK, here I am adding a minor edit.
+
 // "qjackctl --start".unixCmd; // open and start JACK
 "slgui -L /home/ruviaro/Music/SuperCollider/2013-04-27_Sonorities/sooperlooper_4ch_2013-04-27.slsess -m /home/ruviaro/Music/SuperCollider/2013-04-27_Sonorities/sooperlooper_midi_bindings.slb".unixCmd;// open and start SooperLooper
 s.boot;// boot SC server
