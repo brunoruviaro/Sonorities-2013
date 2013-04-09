@@ -1,13 +1,15 @@
-
 // *******************
 //  Sonorities 2013
 //  MIDI keyboard input
 // *******************
 
+// This file mixes new MIDI notation MIDIFunc with old Responder stuff... one day I'll clean it up...
+
 var noteDict = Dictionary.new;
 NoteOnResponder.removeAll;
 NoteOffResponder.removeAll;
 CCResponder.removeAll;
+MIDIdef.freeAll;
 
 ~layer = 1;
 
@@ -29,14 +31,52 @@ CCResponder
 		~masterOut.set(\amp, val/127);
 	    }, nil, nil, 18, nil);
 
-// stuff for intro synth
+//////////////////////////
+// Stuff for intro synth
+//////////////////////////
 
-~kbus_intro = Bus.control;
+~kbus_intro_vol = Bus.control;
+~kbus_intro_freq1 = Bus.control;
+~kbus_intro_freq2 = Bus.control;
+~kbus_intro_fifreq = Bus.control;
 
+// set initial values
+~kbus_intro_vol.set(0.0);
+~kbus_intro_freq1.set(56);
+~kbus_intro_freq2.set(61);
+~kbus_intro_fifreq.set(3000);
+
+~kbus_intro_vol.getSynchronous;
+~kbus_intro_freq1.getSynchronous;
+~kbus_intro_freq2.getSynchronous;
+~kbus_intro_fifreq.getSynchronous;
+
+MIDIdef.cc(
+	key: \myintrovol,
+	func: { |val, ccnum| ~kbus_intro_vol.set(val.linexp(0,127,0.01,1))},
+	ccNum: 11); // First fader controls intro volume
+
+MIDIdef.cc(
+	key: \myfreq1,
+	func: { |val, ccnum| ~kbus_intro_freq1.set(val.linlin(0,127,56,59))},
+	ccNum: 21); // first knob controls one of the intro notes
+
+MIDIdef.cc(
+	key: \myfreq2,
+	func: { |val, ccnum| ~kbus_intro_freq2.set(val.linlin(0,127,61,64))},
+	ccNum: 22); // second knob controls another of intro notes
+
+MIDIdef.cc(
+	key: \fifreq,
+	func: { |val, ccnum| ~kbus_intro_fifreq.set(val.linexp(0,127,100,4400))},
+	ccNum: 23); // third knob controls LPF cutoff frequency (subtle)
+
+/* OLD
 CCResponder
     ({ |src, chan, num, val|
-		~kbus_intro.set(val/127);
+		~kbus_intro_vol.set(val/127);
 	    }, nil, nil, 14, nil);
+*/
 /*
 CCResponder
     ({ |src, chan, num, val|
@@ -46,9 +86,11 @@ CCResponder
 	}, nil, nil, 34, nil);
 */
 
+//////////////////////////////////////////////////
 // Keys playing samples
 // note on becomes bufnum, gate=1 triggers envelope
 // note off sends gate=0, triggers release envelope
+//////////////////////////////////////////////////////
 NoteOnResponder
 	({|src, chan, note, vel|
 
