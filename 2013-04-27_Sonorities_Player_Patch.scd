@@ -2,22 +2,30 @@
 // Sonorities 2013 PLAYER PATCH
 // ==============================
 
-// OK, here I am adding a minor edit
-
+// Rehearsal 2013-04-11
 
 // "qjackctl --start".unixCmd; // open and start JACK
 
-// "slgui -L /home/ruviaro/Music/SuperCollider/2013-04-27_Sonorities/sooperlooper_4ch_2013-04-27.slsess -m /home/ruviaro/Music/SuperCollider/2013-04-27_Sonorities/sooperlooper_midi_bindings.slb".unixCmd;// open and start SooperLooper
+// acorde ikeda (layer 3, mi) com panning automatico rapido
+// junto com layer 2, sol la si, graves "aveludados" meio bolha/
+// bernardo talvez quebrar o som longo (agua) em samples menores
+// tocaveis pelo teclado (talvez filtros LP, transpor, etc).
+// Objetivo: chegar num outro tipo de interacao de pequenos gestos
+// que se concentrem no medio-grave
+
+"slgui".unixCmd;
+
+"slgui -L /home/ruviaro/Music/SuperCollider/Sonorities-2013/sooperlooper_4ch_2013-04-27.slsess -m /home/ruviaro/Music/SuperCollider/Sonorities-2013/sooperlooper_midi_bindings.slb".unixCmd;// open and start SooperLooper
 
 s.boot;// boot SC server
+().play;
 
 MIDIIn.connect;// open SC MIDI connections
 
 //"jmess -D".unixCmd; // JACK disconnect all
 //"jmess -c /home/ruviaro/Music/SuperCollider/2013-04-27_Sonorities/jmess_rehearsal_with_built-in_audio.xml".unixCmd; // Load JACK connections
 
-
-"aconnect 24:1 129:0".unixCmd; "aconnect 20:1 131:1".unixCmd;  // connect PCR1 to SuperCollider
+"aconnect 20:1 129:0".unixCmd; "aconnect 20:1 131:1".unixCmd;  // connect PCR1 to SuperCollider
 
 ("/home/ruviaro/Music/SuperCollider/Sonorities-2013/2013-04-27_Sonorities_Synths.scd").load;
 ("/home/ruviaro/Music/SuperCollider/Sonorities-2013/2013-04-27_Sonorities_MIDI.scd").load;
@@ -33,7 +41,6 @@ MIDIIn.connect;// open SC MIDI connections
 // Start the global volume control
 ~masterOut = Synth("amp", target: ~intro , addAction: \addBefore);
 
-// Open meter last
 s.meter;
 
 /*
