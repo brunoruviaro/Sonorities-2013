@@ -28,7 +28,7 @@ CCResponder
 
 CCResponder
     ({ |src, chan, num, val|
-		~masterOut.set(\amp, val/127);
+	~masterOut.set(\amp, val.linexp(0,127,0.001,1.5));
 	    }, nil, nil, 18, nil);
 
 //////////////////////////
@@ -53,7 +53,7 @@ CCResponder
 
 MIDIdef.cc(
 	key: \myintrovol,
-	func: { |val, ccnum| ~kbus_intro_vol.set(val.linexp(0,127,0.01,1))},
+	func: { |val, ccnum| ~kbus_intro_vol.set(val.linexp(0,127,0.001,1.5))},
 	ccNum: 11); // First fader controls intro volume
 
 MIDIdef.cc(
