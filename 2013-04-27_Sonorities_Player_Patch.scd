@@ -2,7 +2,7 @@
 // Sonorities 2013 PLAYER PATCH
 // ==============================
 
-// Rehearsal 2013-04-11
+// Rehearsal 2013-04-16
 
 // "qjackctl --start".unixCmd; // open and start JACK
 
@@ -42,6 +42,9 @@ MIDIIn.connect;// open SC MIDI connections
 ~masterOut = Synth("amp", target: ~intro , addAction: \addBefore);
 
 s.meter;
+
+"meterbridge -t dpm x x x x".unixCmd;
+
 
 /*
 0. connect audio & MIDI interfaces
