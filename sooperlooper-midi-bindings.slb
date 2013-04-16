@@ -1,0 +1,5 @@
+0 cc 15  set input_gain 0  0 1  gain 0 127
+0 cc 16  set feedback 0  0 1  norm 0 127
+0 cc 17  set wet 0  0 1  gain 0 127
+0 cc 31  susnote record 0  0 1  norm 0 127
+0 cc 32  susnote overdub 0  0 1  norm 0 127
