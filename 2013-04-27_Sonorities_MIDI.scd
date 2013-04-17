@@ -28,7 +28,7 @@ CCResponder
 
 CCResponder
     ({ |src, chan, num, val|
-	~masterOut.set(\amp, val.linexp(0,127,0.001,1.5));
+	~masterOut.set(\amp, val.linexp(0,127,0.001,2));
 	    }, nil, nil, 18, nil);
 
 //////////////////////////

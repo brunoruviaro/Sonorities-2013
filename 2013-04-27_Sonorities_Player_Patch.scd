@@ -15,7 +15,7 @@
 
 "slgui".unixCmd;
 
-"slgui -L /home/ruviaro/Music/SuperCollider/Sonorities-2013/sooperlooper_4ch_2013-04-27.slsess -m /home/ruviaro/Music/SuperCollider/Sonorities-2013/sooperlooper_midi_bindings.slb".unixCmd;// open and start SooperLooper
+"slgui -L /home/ruviaro/Music/SuperCollider/Sonorities-2013/sooperlooper.slsess -m /home/ruviaro/Music/SuperCollider/Sonorities-2013/sooperlooper-midi-bindings.slb".unixCmd;// open and start SooperLooper
 
 s.boot;// boot SC server
 ().play;
